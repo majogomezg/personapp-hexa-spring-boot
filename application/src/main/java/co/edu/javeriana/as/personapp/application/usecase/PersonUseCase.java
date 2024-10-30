@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @UseCase
 public class PersonUseCase implements PersonInputPort {
-
 	
 	private PersonOutputPort personPersintence;
 	
@@ -55,7 +54,7 @@ public class PersonUseCase implements PersonInputPort {
 
 	@Override
 	public List<Person> findAll() {
-		log.info("Output: " + personPersintence.getClass());
+		System.out.println("Output: " + personPersintence.getClass());
 		return personPersintence.find();
 	}
 

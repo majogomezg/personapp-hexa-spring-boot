@@ -3,6 +3,7 @@ package co.edu.javeriana.as.personapp.terminal.adapter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import co.edu.javeriana.as.personapp.common.exceptions.NoExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -42,18 +43,63 @@ public class PersonaInputAdapterCli {
 			throw new InvalidOptionException("Invalid database option: " + dbOption);
 		}
 	}
-
-	public void historial1() {
-		log.info("Into historial PersonaEntity in Input Adapter");
-		List<PersonaModelCli> persona = personInputPort.findAll().stream().map(personaMapperCli::fromDomainToAdapterCli)
-					.collect(Collectors.toList());
-		persona.forEach(p -> System.out.println(p.toString()));
-	}
 	public void historial() {
 	    log.info("Into historial PersonaEntity in Input Adapter");
 	    personInputPort.findAll().stream()
 	        .map(personaMapperCli::fromDomainToAdapterCli)
 	        .forEach(System.out::println);
+	}
+
+
+	public void create (int cc, String nombre, String apellido, String genero, Integer edad){
+		PersonaModelCli persona = PersonaModelCli.builder()
+				.cc(cc)
+				.nombre(nombre)
+				.apellido(apellido)
+				.genero(genero)
+				.edad(edad)
+				.build();
+		personInputPort.create(personaMapperCli.fromModelToDomain(persona));
+	}
+
+	public void edit (int cc, String nombre, String apellido, String genero, Integer edad){
+		try{
+			PersonaModelCli persona = PersonaModelCli.builder()
+					.cc(cc)
+					.nombre(nombre)
+					.apellido(apellido)
+					.genero(genero)
+					.edad(edad)
+					.build();
+			persona = personaMapperCli.fromDomainToAdapterCli(personInputPort.edit(cc, personaMapperCli.fromModelToDomain(persona)));
+			System.out.println("Persona actualizada");
+			System.out.println(persona.toString());
+		} catch (NoExistException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void drop (int cc){
+		try{
+			if (personInputPort.drop(cc))
+				System.out.println("Persona eliminada");
+			else
+				System.out.println("No se pudo eliminar la persona");
+		} catch (NoExistException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void count (){
+		System.out.println("Cantidad de personas: " + personInputPort.count());
+	}
+
+	public void findOne (int cc){
+		try{
+			System.out.println(personaMapperCli.fromDomainToAdapterCli(personInputPort.findOne(cc)).toString());
+		} catch (NoExistException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
