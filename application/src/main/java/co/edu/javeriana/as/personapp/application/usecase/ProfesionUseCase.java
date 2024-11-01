@@ -17,7 +17,7 @@ public class ProfesionUseCase implements ProfesionInputPort {
 
     private ProfesionOutputPort profesionPersistence;
 
-    private ProfesionUseCase(@Qualifier("profesionOutputAdapterMaria") ProfesionOutputPort persistence) {
+    public ProfesionUseCase(@Qualifier("profesionOutputAdapterMaria") ProfesionOutputPort persistence) {
         this.profesionPersistence = persistence;
     }
 
