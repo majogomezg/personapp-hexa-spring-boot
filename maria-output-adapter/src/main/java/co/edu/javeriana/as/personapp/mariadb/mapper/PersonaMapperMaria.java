@@ -32,8 +32,8 @@ public class PersonaMapperMaria {
 		personaEntity.setApellido(person.getLastName());
 		personaEntity.setGenero(validateGenero(person.getGender()));
 		personaEntity.setEdad(validateEdad(person.getAge()));
-		personaEntity.setEstudios(validateEstudios(person.getStudies()));
-		personaEntity.setTelefonos(validateTelefonos(person.getPhoneNumbers()));
+		// personaEntity.setEstudios(validateEstudios(person.getStudies()));
+		// personaEntity.setTelefonos(validateTelefonos(person.getPhoneNumbers()));
 		return personaEntity;
 	}
 
@@ -64,8 +64,8 @@ public class PersonaMapperMaria {
 		person.setLastName(personaEntity.getApellido());
 		person.setGender(validateGender(personaEntity.getGenero()));
 		person.setAge(validateAge(personaEntity.getEdad()));
-		person.setStudies(validateStudies(personaEntity.getEstudios()));
-		person.setPhoneNumbers(validatePhones(personaEntity.getTelefonos()));
+		// person.setStudies(validateStudies(personaEntity.getEstudios()));
+		// person.setPhoneNumbers(validatePhones(personaEntity.getTelefonos()));
 		return person;
 	}
 
