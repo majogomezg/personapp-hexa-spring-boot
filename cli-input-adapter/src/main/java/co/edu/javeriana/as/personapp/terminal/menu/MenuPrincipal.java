@@ -1,16 +1,15 @@
 package co.edu.javeriana.as.personapp.terminal.menu;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import co.edu.javeriana.as.personapp.terminal.adapter.EstudioInputAdapterCli;
+import co.edu.javeriana.as.personapp.terminal.adapter.PersonaInputAdapterCli;
 import co.edu.javeriana.as.personapp.terminal.adapter.ProfesionInputAdapterCli;
 import co.edu.javeriana.as.personapp.terminal.adapter.TelefonoInputAdapterCli;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import co.edu.javeriana.as.personapp.terminal.adapter.PersonaInputAdapterCli;
-import lombok.extern.slf4j.Slf4j;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 @Slf4j
 @Controller

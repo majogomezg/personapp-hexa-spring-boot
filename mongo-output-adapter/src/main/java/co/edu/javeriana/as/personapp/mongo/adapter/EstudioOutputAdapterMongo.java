@@ -26,7 +26,7 @@ public class EstudioOutputAdapterMongo implements EstudioOutputPort {
 
 
     @Override
-    public Study save(Study study) { 
+    public Study save(Study study) {
         log.debug("Into save on Adapter MongoDB");
         try {
             EstudiosDocument persistedEstudio = estudioRepositoryMongo.save(estudiosMapperMongo.fromDomainToAdapter(study));

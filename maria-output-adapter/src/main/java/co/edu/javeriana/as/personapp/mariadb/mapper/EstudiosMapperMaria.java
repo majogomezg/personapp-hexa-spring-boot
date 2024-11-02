@@ -1,16 +1,14 @@
 package co.edu.javeriana.as.personapp.mariadb.mapper;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
-import co.edu.javeriana.as.personapp.domain.Profession;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
 import co.edu.javeriana.as.personapp.domain.Study;
 import co.edu.javeriana.as.personapp.mariadb.entity.EstudiosEntity;
 import co.edu.javeriana.as.personapp.mariadb.entity.EstudiosEntityPK;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Mapper
 public class EstudiosMapperMaria {

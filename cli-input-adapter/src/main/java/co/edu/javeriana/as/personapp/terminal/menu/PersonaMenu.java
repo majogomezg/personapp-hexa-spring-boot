@@ -1,11 +1,11 @@
 package co.edu.javeriana.as.personapp.terminal.menu;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import co.edu.javeriana.as.personapp.common.exceptions.InvalidOptionException;
 import co.edu.javeriana.as.personapp.terminal.adapter.PersonaInputAdapterCli;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 @Slf4j
 public class PersonaMenu {

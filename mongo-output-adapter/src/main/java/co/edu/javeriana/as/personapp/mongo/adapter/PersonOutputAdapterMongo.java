@@ -1,19 +1,17 @@
 package co.edu.javeriana.as.personapp.mongo.adapter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.mongodb.MongoWriteException;
-
 import co.edu.javeriana.as.personapp.application.port.out.PersonOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.mongo.document.PersonaDocument;
 import co.edu.javeriana.as.personapp.mongo.mapper.PersonaMapperMongo;
 import co.edu.javeriana.as.personapp.mongo.repository.PersonaRepositoryMongo;
+import com.mongodb.MongoWriteException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Adapter("personOutputAdapterMongo")

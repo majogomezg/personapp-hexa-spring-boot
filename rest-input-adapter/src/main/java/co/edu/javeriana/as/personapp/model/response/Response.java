@@ -1,8 +1,8 @@
 package co.edu.javeriana.as.personapp.model.response;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 
 public class Response {
 	

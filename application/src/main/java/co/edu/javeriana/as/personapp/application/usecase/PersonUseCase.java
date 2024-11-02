@@ -1,9 +1,5 @@
 package co.edu.javeriana.as.personapp.application.usecase;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Qualifier;
-
 import co.edu.javeriana.as.personapp.application.port.in.PersonInputPort;
 import co.edu.javeriana.as.personapp.application.port.out.PersonOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.UseCase;
@@ -12,6 +8,9 @@ import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.domain.Phone;
 import co.edu.javeriana.as.personapp.domain.Study;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import java.util.List;
 
 @Slf4j
 @UseCase

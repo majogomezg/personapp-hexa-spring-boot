@@ -1,8 +1,8 @@
 package co.edu.javeriana.as.personapp.domain;
 
-import java.time.LocalDate;
-
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor

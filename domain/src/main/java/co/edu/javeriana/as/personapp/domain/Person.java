@@ -1,8 +1,8 @@
 package co.edu.javeriana.as.personapp.domain;
 
-import java.util.List;
-
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
