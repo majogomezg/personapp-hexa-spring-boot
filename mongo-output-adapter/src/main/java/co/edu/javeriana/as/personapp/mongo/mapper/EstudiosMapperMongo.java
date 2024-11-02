@@ -45,7 +45,7 @@ public class EstudiosMapperMongo {
 		study.setProfession(profession);
 		study.setGraduationDate(estudiosDocument.getFecha());
 		study.setUniversityName(validateUniver(estudiosDocument.getUniver()));
-		return null;
+		return study;
 	}
 
 	private String validateId(@NonNull Integer identificationPerson, @NonNull Integer identificationProfession) {
