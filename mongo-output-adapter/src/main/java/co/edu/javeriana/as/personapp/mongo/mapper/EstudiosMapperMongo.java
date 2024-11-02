@@ -1,7 +1,5 @@
 package co.edu.javeriana.as.personapp.mongo.mapper;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -12,60 +10,49 @@ import co.edu.javeriana.as.personapp.mongo.document.EstudiosDocument;
 import co.edu.javeriana.as.personapp.mongo.document.PersonaDocument;
 import co.edu.javeriana.as.personapp.mongo.document.ProfesionDocument;
 import lombok.NonNull;
+import org.springframework.context.annotation.Lazy;
 
 @Mapper
 public class EstudiosMapperMongo {
 
 	@Autowired
+	@Lazy
 	private PersonaMapperMongo personaMapperMongo;
 
 	@Autowired
+	@Lazy
 	private ProfesionMapperMongo profesionMapperMongo;
 
 	public EstudiosDocument fromDomainToAdapter(Study study) {
 		EstudiosDocument estudio = new EstudiosDocument();
+		PersonaDocument personaDocument = personaMapperMongo.fromDomainToAdapter(study.getPerson());
+		ProfesionDocument profesionDocument = profesionMapperMongo.fromDomainToAdapter(study.getProfession());
+
 		estudio.setId(validateId(study.getPerson().getIdentification(), study.getProfession().getIdentification()));
-		estudio.setPrimaryPersona(validatePrimaryPersona(study.getPerson()));
-		estudio.setPrimaryProfesion(validatePrimaryProfesion(study.getProfession()));
-		estudio.setFecha(validateFecha(study.getGraduationDate()));
+		estudio.setPrimaryPersona(personaDocument);
+		estudio.setPrimaryProfesion(profesionDocument);
+		estudio.setFecha(study.getGraduationDate());
 		estudio.setUniver(validateUniver(study.getUniversityName()));
 		return estudio;
+	}
+
+	public Study fromAdapterToDomain(EstudiosDocument estudiosDocument) {
+		Study study = new Study();
+		Person person = personaMapperMongo.fromAdapterToDomain(estudiosDocument.getPrimaryPersona());
+		Profession profession = profesionMapperMongo.fromAdapterToDomain(estudiosDocument.getPrimaryProfesion());
+
+		study.setPerson(person);
+		study.setProfession(profession);
+		study.setGraduationDate(estudiosDocument.getFecha());
+		study.setUniversityName(validateUniver(estudiosDocument.getUniver()));
+		return null;
 	}
 
 	private String validateId(@NonNull Integer identificationPerson, @NonNull Integer identificationProfession) {
 		return identificationPerson + "-" + identificationProfession;
 	}
 
-	private PersonaDocument validatePrimaryPersona(@NonNull Person person) {
-		return person != null ? personaMapperMongo.fromDomainToAdapter(person) : new PersonaDocument();
-	}
-
-	private ProfesionDocument validatePrimaryProfesion(@NonNull Profession profession) {
-		return profession != null ? profesionMapperMongo.fromDomainToAdapter(profession) : new ProfesionDocument();
-	}
-
-	private LocalDate validateFecha(LocalDate graduationDate) {
-		return graduationDate != null ? graduationDate : null;
-	}
-
 	private String validateUniver(String universityName) {
 		return universityName != null ? universityName : "";
-	}
-
-	public Study fromAdapterToDomain(EstudiosDocument estudiosDocument) {
-		Study study = new Study();
-		study.setPerson(personaMapperMongo.fromAdapterToDomain(estudiosDocument.getPrimaryPersona()));
-		study.setProfession(profesionMapperMongo.fromAdapterToDomain(estudiosDocument.getPrimaryProfesion()));
-		study.setGraduationDate(validateGraduationDate(estudiosDocument.getFecha()));
-		study.setUniversityName(validateUniversityName(estudiosDocument.getUniver()));
-		return null;
-	}
-
-	private LocalDate validateGraduationDate(LocalDate fecha) {
-		return fecha != null ? fecha : null;
-	}
-
-	private String validateUniversityName(String univer) {
-		return univer != null ? univer : "";
 	}
 }
