@@ -3,6 +3,7 @@ package co.edu.javeriana.as.personapp.mariadb.adapter;
 import co.edu.javeriana.as.personapp.application.port.out.EstudioOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.domain.Study;
+import co.edu.javeriana.as.personapp.mariadb.entity.EstudiosEntity;
 import co.edu.javeriana.as.personapp.mariadb.entity.EstudiosEntityPK;
 import co.edu.javeriana.as.personapp.mariadb.mapper.EstudiosMapperMaria;
 import co.edu.javeriana.as.personapp.mariadb.repository.EstudioRepositoryMaria;
@@ -22,7 +23,12 @@ public class EstudioOutputAdapterMaria implements EstudioOutputPort {
 
     @Override
     public Study save(Study study) {
-        return estudiosMapperMaria.fromAdapterToDomain(estudioRepositoryMaria.save(estudiosMapperMaria.fromDomainToAdapter(study)));
+        EstudiosEntity estudios = estudioRepositoryMaria.save(estudiosMapperMaria.fromDomainToAdapter(study));
+        if(estudioRepositoryMaria.findById(estudios.getEstudiosPK()).isEmpty()){
+            return null;
+        }
+        estudios = estudioRepositoryMaria.findById(estudios.getEstudiosPK()).get();
+        return estudiosMapperMaria.fromAdapterToDomain(estudios);
     }
 
     @Override
