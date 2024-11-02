@@ -44,6 +44,7 @@ public class TelefonoInputAdapterRest {
     @Qualifier("personOutputAdapterMaria")
     private PersonOutputPort personOutputPortMaria;
 
+    @Autowired
     @Qualifier("personOutputAdapterMongo")
     private PersonOutputPort personOutputPortMongo;
 
